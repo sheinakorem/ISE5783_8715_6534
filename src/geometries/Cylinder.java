@@ -4,13 +4,32 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
-public class Cylinder extends Tube{
+/** Cylinder class inherits from tube and returns null
+ * @author michal slutzkin & sheina korem
+ */
+public class Cylinder extends Tube {
+
     double height;
-     public Cylinder(double radius, Ray axisRay, double height) {
+
+    /**
+     * constructor for cylinder
+     * @param radius = radius of cylinder
+     * @param axisRay = axisRay from Tube
+     * @param height = height of Cylinder
+     */
+    public Cylinder(double radius, Ray axisRay, double height) {
+
         super(radius, axisRay);
         this.height = height;
     }
 
+    /**
+     * gets point and returns null(as for now)
+     * @param point= point
+     * @return null
+     */
     @Override
-    public Vector getNormal (Point point) { return null; }
+    public Vector getNormal(Point point) {
+        return null;
+    }
 }
