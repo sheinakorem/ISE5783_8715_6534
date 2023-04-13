@@ -59,9 +59,7 @@ public class Vector extends Point{
 
     public double dotProduct(Vector v){
 
-        return (this.xyz.d1 * v.xyz.d1 +
-        this.xyz.d2 * v.xyz.d2 +
-        this.xyz.d3 * v.xyz.d3);
+        return (this.xyz.d1 * v.xyz.d1 + this.xyz.d2 * v.xyz.d2 + this.xyz.d3 * v.xyz.d3);
     }
 
     /**
@@ -99,7 +97,6 @@ public class Vector extends Point{
      * @return normalized vector
      */
     public Vector normalize(){
-
 
         double magnitude = Math.sqrt(xyz.d1 * xyz.d1 + xyz.d2 * xyz.d2 + xyz.d3 * xyz.d3);
         if (magnitude == 0) {

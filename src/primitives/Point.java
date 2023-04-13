@@ -7,7 +7,7 @@ import java.util.Objects;
  * @author michal slutzkin & sheina korem
  */
 public class Point {
-    protected Double3 xyz;
+    final Double3 xyz;
 
     /**
      *A constructor that accepts an object of type Double3
@@ -15,7 +15,6 @@ public class Point {
      */
     public Point(Double3 xyz) {
         this.xyz=new Double3(xyz.d1,xyz.d2,xyz.d3);
-
     }
 
     /**

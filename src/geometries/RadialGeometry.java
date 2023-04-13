@@ -1,5 +1,7 @@
 package geometries;
 
+import primitives.Ray;
+
 /**
  * class for geometric shapes with radius
  * @author michal slutzkin & sheina korem
@@ -14,4 +16,6 @@ public abstract class RadialGeometry implements Geometry{
      public RadialGeometry(double radius) {
           this.radius = radius;
      }
+
+
 }

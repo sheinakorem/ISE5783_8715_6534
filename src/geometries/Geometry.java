@@ -14,4 +14,5 @@ public interface Geometry {
      * @return normalized vector
      */
     public Vector getNormal(Point p);
+
 }
