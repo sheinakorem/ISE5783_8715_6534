@@ -12,8 +12,8 @@ import static primitives.Util.isZero;
  */
 public class Plane implements Geometry {
 
-    public Point q0;
-    public Vector normal;
+    private final Point q0;
+    private final Vector normal;
 
     /**
      * Constructor for plane. Gets three points and calculates the normal vector.

@@ -6,28 +6,53 @@ import primitives.Ray;
 import primitives.Vector;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * Unit tests for geometries.Tube class
+ * @author michal slutzkin & sheina korem
+ */
 class TubeTests {
-    void testConstructor() {
-        double expectedRadius = 2.5;
-        Ray expectedAxisRay = new Ray(new Vector(0, 0, 1), new Point(0, 0, 0));
-        Tube tube = new Tube(expectedRadius, expectedAxisRay);
-        assertEquals(expectedRadius, tube.radius, 0.0001);
-        assertEquals(expectedAxisRay, tube.axisRay);
-    }
+
 
     /**
-     * Test for when the connection between the point on the body and the ray’s head creates a 90 degrees with the ray (boundary test)
-     * The test checks if the normal to the tube at the point of intersection with the ray is perpendicular to the axis ray
+     * Test method for {@link geometries.Tube# Tube.Tube(radius,Ray).}
      */
     @Test
-    void testGetNormalAt90Degrees() {
-        Tube tube = new Tube(2.0, new Ray( new Vector(0, 0, 1) , new Point(0, 0, 0)));
-        Point p = new Point(2, 0, 0);
-        Vector expectedNormal = new Vector(2, 0, 0).normalize();
-        Vector actualNormal = tube.getNormal(p);
-        assertEquals(expectedNormal, actualNormal);
-        assertTrue(actualNormal.dotProduct(tube.axisRay.dir) < 0.0001);
+
+   public  void testConstructor() {
+        // ============ Equivalence Partitions Tests ==============
+        //TC01: Test for a proper result
+        try {
+            new Tube(1, new Ray(new Vector(1, 5, 4), new Point(1, 2, 3)));
+        } catch (IllegalArgumentException error) {
+            throw new IllegalArgumentException("Failed constructor of the correct Tube");
+        }
+        // =============== Boundary Values Tests ==================
+        //TC02: Test when the radius 0
+        try {
+            new Tube(0, new Ray(new Vector(1, 5, 4), new Point(1, 2, 3)));
+            fail("Constructed a Tube while a radius can not be 0");
+        } catch (IllegalArgumentException ignored) {
+        }
+        //TC03:Test when the radius negative, -1
+        try {
+            new Tube(-1, new Ray(new Vector(1, 5, 4), new Point(1, 2, 3)));
+            fail("Constructed a Tube while a radius can not be negative");
+        } catch (IllegalArgumentException ignored) {
+        }
     }
+
+
+    /**
+     * Test method for {@link geometries.Tube# Tube.getNormal(point).}
+     */
+    @Test
+    public void testGetNormal() {
+        // ============ Equivalence Partitions Tests ==============
+        Tube tube= new Tube(1d, new Ray(new Vector(0,0,1),new Point(1,1,0)));
+
+        assertEquals(new Vector(0,-1,0), tube.getNormal(new Point(1,0,2)), "Bad normal to tube");
+
+    }
+
 
 }

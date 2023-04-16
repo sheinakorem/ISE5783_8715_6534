@@ -4,8 +4,15 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Unit tests for primitives.Point class
+ * @author michal slutzkin & sheina korem
+ */
 class PointTests {
 
+    /**
+     * Test method for {@link primitives.Point# Point.Subtract(point).}
+     */
     @Test
     void testsSubtract() {
 
@@ -20,6 +27,9 @@ class PointTests {
                     "Subtract P from P must throw exception");
     }
 
+    /**
+     * Test method for {@link primitives.Point# Point.Add(vector).}
+     */
     @Test
     void testsAdd() {
         // ============ Equivalence Partitions Tests ==============
@@ -30,6 +40,9 @@ class PointTests {
         // there are no boundary tests
     }
 
+    /**
+     * Test method for {@link primitives.Point# Point.DistanceSquared(point).}
+     */
     @Test
     void testsDistanceSquared() {
         // ============ Equivalence Partitions Tests ==============
@@ -43,6 +56,9 @@ class PointTests {
                 "Wrong squared distance between the point and itself");
     }
 
+    /**
+     * Test method for {@link primitives.Point# Point.Distance(point).}
+     */
     @Test
     void testsDistance() {
         // ============ Equivalence Partitions Tests ==============

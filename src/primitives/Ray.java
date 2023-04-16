@@ -7,9 +7,16 @@ import java.util.Objects;
  * @author michal slutzkin & sheina korem
  */
 public class Ray {
-    Point p0;
-    Vector dir;
+    private final Point p0;
+    private final Vector dir;
 
+
+    public Vector getDir() {
+        return dir;
+    }
+    public Point getPoint() {
+        return p0;
+    }
     /**
      * constructor that accepts a point and a vector
      * @param v= normalized vector

@@ -5,8 +5,15 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import static primitives.Util.isZero;
+/**
+ * Unit tests for primitives.Vector class
+ * @author michal slutzkin & sheina korem
+ */
 class VectorTests {
 
+    /**
+     * Test method for {@link primitives.Vector# Vector.add(vector).}
+     */
     @Test
     void testsAdd() {
         // ============ Equivalence Partitions Tests ==============
@@ -19,6 +26,9 @@ class VectorTests {
                 () -> new Vector(1, 2, 3).add(new Vector(-1, -2, -3)),"Add v plus -v must throw exception");
     }
 
+    /**
+     * Test method for {@link primitives.Vector# Vector.scale(double).}
+     */
     @Test
     void testsScale() {
         // ============ Equivalence Partitions Tests ==============
@@ -31,7 +41,9 @@ class VectorTests {
     }
 
 
-
+    /**
+     * Test method for {@link primitives.Vector# Vector.DotProduct(vector).}
+     */
     @Test
     void testsDotProduct() {
         Vector v1 = new Vector(1, 2, 3);
@@ -47,6 +59,9 @@ class VectorTests {
         assertEquals( 0d, v1.dotProduct(v3), 0.00001,"dotProduct() for orthogonal vectors is not zero");
     }
 
+    /**
+     * Test method for {@link primitives.Vector# Vector.CrossProduct(vector).}
+     */
     @Test
     void testsCrossProduct() {
         Vector v1 = new Vector(1, 2, 3);
@@ -68,6 +83,9 @@ class VectorTests {
         assertThrows( IllegalArgumentException.class, () -> v1.crossProduct(v3),"crossProduct() for parallel vectors does not throw an exception");
     }
 
+    /**
+     * Test method for {@link primitives.Vector# Vector.LengthSquared().}
+     */
     @Test
     void testsLengthSquared() {
         // ============ Equivalence Partitions Tests ==============
@@ -75,12 +93,18 @@ class VectorTests {
         assertEquals( 14d, new Vector(1, 2, 3).lengthSquared(), 0.00001,"lengthSquared() wrong value");
     }
 
+    /**
+     * Test method for {@link primitives.Vector# Vector.Length().}
+     */
     @Test
     void testsLength() {
         // TC01: Simple test
         assertEquals( 5d, new Vector(0, 3, 4).length(), 0.00001,"length() wrong value");
     }
 
+    /**
+     * Test method for {@link primitives.Vector# Vector.Normalize().}
+     */
     @Test
     void testsNormalize() {
         Vector v = new Vector(0, 3, 4);

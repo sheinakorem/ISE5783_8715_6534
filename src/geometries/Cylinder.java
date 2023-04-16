@@ -25,11 +25,11 @@ public class Cylinder extends Tube {
 
     /**
      * gets point and returns null(as for now)
-     * @param point= point
+     * @param p= point
      * @return null
      */
     @Override
-    public Vector getNormal(Point point) {
+    public Vector getNormal(Point p) {
         return null;
     }
 }

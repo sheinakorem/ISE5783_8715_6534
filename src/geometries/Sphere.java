@@ -13,18 +13,20 @@ public class Sphere extends RadialGeometry {
       * @param radius=radius
       * @param center=central point
       */
-     public Sphere(double radius, Point center) {
-          super(radius);
-          this.center = center;
+     public Sphere(double r, Point c) {
+          super(r);
+          if (r <= 0) {
+               throw new IllegalArgumentException("The radius should be greater then 0");
+          }
+          radius=r;
+          center = c;
      }
 
      /**
       * override function to return the normal(null)
       * @param point = point
-      * @return null
+      * @return normalized point
       */
      @Override
-     public Vector getNormal (Point point) {return null;
-
-     }
+     public Vector getNormal (Point point) {return point.subtract(center).normalize();}
 }
