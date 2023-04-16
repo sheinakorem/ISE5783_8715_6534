@@ -63,7 +63,7 @@ public class Plane implements Geometry {
      * override function to return the normal(null)
      *
      * @param p = point
-     * @return null
+     * @return function getNormal
      */
 
     @Override

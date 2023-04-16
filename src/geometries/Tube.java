@@ -16,7 +16,7 @@ public class Tube extends RadialGeometry {
     /**
      * constructor for Tube. gets radius and axisRay .uses the RadialGeometry constructor
      * @param r=radius
-     * @param axisRay=axisRay
+     * @param aRay=axisRay
      */
     public Tube(double r, Ray aRay) {
         super(r);
@@ -32,7 +32,7 @@ public class Tube extends RadialGeometry {
     /**
      * override function to return the normal(null)
      * @param point = point
-     * @return null
+     *@return normalized vector
      */
 
     @Override
