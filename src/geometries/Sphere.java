@@ -10,8 +10,8 @@ public class Sphere extends RadialGeometry {
 
      /**
       * constructor for sphere. gets radius and a center point .uses the RadialGeometry constructor
-      * @param radius=radius
-      * @param center=central point
+      * @param r=radius
+      * @param c=central point
       */
      public Sphere(double r, Point c) {
           super(r);

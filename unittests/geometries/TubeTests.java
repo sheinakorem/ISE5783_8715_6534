@@ -6,8 +6,10 @@ import primitives.Ray;
 import primitives.Vector;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Unit tests for geometries.Tube class
+ *
  * @author michal slutzkin & sheina korem
  */
 class TubeTests {
