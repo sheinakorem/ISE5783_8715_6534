@@ -17,6 +17,21 @@ public class Point {
         this.xyz=new Double3(xyz.d1,xyz.d2,xyz.d3);
     }
 
+    public double get_d1() {return (xyz.d1);}
+
+    /**
+     * @return y axis coordinate value
+     */
+    public double get_d2() {
+        return (xyz.d2);
+    }
+
+    /**
+     * @return z axis coordinate value
+     */
+    public double get_d3() {return (xyz.d3); }
+
+
     /**
      * A constructor that accepts three double numbers for the coordinate values
      * @param x=xyz.x

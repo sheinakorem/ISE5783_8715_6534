@@ -1,6 +1,8 @@
 package primitives;
 
-import java.util.Objects;
+import java.util.*;
+
+import static primitives.Util.isZero;
 
 /**
  * class that represents Ray
@@ -16,8 +18,14 @@ public class Ray {
         return dir;
     }
 
-    public Point getPoint() {
-        return p0;
+    /**
+     * Gets a point on the ray by calculating p0 + t*v.
+     *
+     * @param t A scalar to calculate the point.
+     * @return A point on the ray.
+     */
+    public Point getPoint(double t) {
+        return p0.add(dir.scale(t));
     }
 
     /**
@@ -30,8 +38,7 @@ public class Ray {
         this.p0 = p;
         this.dir = v.normalize();
     }
-
-    /**
+           /**
      * override function for equal operation
      *
      * @param o= object o
@@ -54,4 +61,9 @@ public class Ray {
     public String toString() {
         return "Ray" + "p0=" + p0 + ", dir=" + dir;
     }
+
+    public Point getP0() {
+        return p0;
+    }
+
 }

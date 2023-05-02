@@ -1,6 +1,6 @@
 package primitives;
 
-import java.util.Objects;
+import java.util.*;
 
 /**
  * vector class that inserts point

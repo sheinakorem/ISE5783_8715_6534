@@ -7,7 +7,7 @@ import primitives.Point;
  * An interface called  Geometry for geometric shapes
  * @author michal slutzkin & sheina korem
  */
-public interface Geometry {
+public interface Geometry extends Intersectable{
     /**
      * function that gets point and returns a normalized vector
      * @param p = point
