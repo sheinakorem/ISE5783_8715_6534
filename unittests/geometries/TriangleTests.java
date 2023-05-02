@@ -118,6 +118,5 @@ class TriangleTests {
         assertNull(triangle.findIntersections(new Ray(new Vector(0.32d,-0.09d,0),new Point(1,0,0))),"Ray On vertex");
         //TC13: Ray On edge's continuation
         assertNull(triangle.findIntersections(new Ray(new Vector(-2.31d,-1d,-1.5d),new Point(0,-0.5d,1.5d))),"Ray On edge's continuation");
-
     }
 }

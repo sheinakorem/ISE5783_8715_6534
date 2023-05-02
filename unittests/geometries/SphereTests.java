@@ -56,7 +56,7 @@ class SphereTests {
         assertEquals(new Vector(0, 0, 1), sp.getNormal(new Point(0, 0, 2)));
     }
                                                                                                                                                                                                                                                         @Test
-    public void findIntsersectionsTest() {
+    public void findIntsersectionsTest(){
         Sphere sphere = new Sphere(1d, new Point(1, 0, 0));
 
         // ============ Equivalence Partitions Tests ==============
