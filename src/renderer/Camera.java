@@ -1,12 +1,10 @@
 package renderer;
-
 import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
-
 import java.nio.channels.NotYetBoundException;
-
 import static primitives.Util.isZero;
+
 
 public class Camera {
 
