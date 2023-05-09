@@ -8,7 +8,7 @@ import java.nio.channels.NotYetBoundException;
 
 import static primitives.Util.isZero;
 
-public class Camera{
+public class Camera {
     //eye of the pinhole Camera
     private Point p0;
 
