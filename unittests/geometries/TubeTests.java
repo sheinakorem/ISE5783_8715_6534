@@ -24,20 +24,20 @@ class TubeTests {
         // ============ Equivalence Partitions Tests ==============
         //TC01: Test for a proper result
         try {
-            new Tube(1, new Ray(new Vector(1, 5, 4), new Point(1, 2, 3)));
+            new Tube(1, new Ray(new Point(1, 2, 3), new Vector(1, 5, 4)));
         } catch (IllegalArgumentException error) {
             throw new IllegalArgumentException("Failed constructor of the correct Tube");
         }
         // =============== Boundary Values Tests ==================
         //TC02: Test when the radius 0
         try {
-            new Tube(0, new Ray(new Vector(1, 5, 4), new Point(1, 2, 3)));
+            new Tube(0, new Ray(new Point(1, 2, 3), new Vector(1, 5, 4)));
             fail("Constructed a Tube while a radius can not be 0");
         } catch (IllegalArgumentException ignored) {
         }
         //TC03:Test when the radius negative, -1
         try {
-            new Tube(-1, new Ray(new Vector(1, 5, 4), new Point(1, 2, 3)));
+            new Tube(-1, new Ray(new Point(1, 2, 3), new Vector(1, 5, 4)));
             fail("Constructed a Tube while a radius can not be negative");
         } catch (IllegalArgumentException ignored) {
         }
@@ -50,7 +50,7 @@ class TubeTests {
     @Test
     public void testGetNormal() {
         // ============ Equivalence Partitions Tests ==============
-        Tube tube= new Tube(1d, new Ray(new Vector(0,0,1),new Point(1,1,0)));
+        Tube tube= new Tube(1d, new Ray(new Point(1,1,0), new Vector(0,0,1)));
 
         assertEquals(new Vector(0,-1,0), tube.getNormal(new Point(1,0,2)), "Bad normal to tube");
 

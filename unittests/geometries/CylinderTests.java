@@ -13,7 +13,7 @@ class CylinderTests {
         // ============ Equivalence Partitions Tests ==============
         //TC01: Test for a proper result
         try {
-            new Cylinder(2, new Ray(new Vector(1, 5, 4), new Point(1, 2, 3)), 3);
+            new Cylinder(2, new Ray(new Point(1, 2, 3), new Vector(1, 5, 4)), 3);
         } catch (IllegalArgumentException error) {
             throw new IllegalArgumentException("Failed constructor of the correct cylinder");
         }
@@ -21,25 +21,25 @@ class CylinderTests {
         // =============== Boundary Values Tests ==================
         //TC02: Test when the radius 0
         try {
-            new Cylinder(0, new Ray(new Vector(1, 5, 4), new Point(1, 2, 3)), 5);
+            new Cylinder(0, new Ray(new Point(1, 2, 3), new Vector(1, 5, 4)), 5);
             fail("Constructed a cylinder while a radius can not be 0");
         } catch (IllegalArgumentException ignored) {
         }
         //TC03:Test when the radius negative, -1
         try {
-            new Cylinder(-1, new Ray(new Vector(1, 5, 4), new Point(1, 2, 3)), 5);
+            new Cylinder(-1, new Ray(new Point(1, 2, 3), new Vector(1, 5, 4)), 5);
             fail("Constructed a cylinder while a radius can not be negative");
         } catch (IllegalArgumentException ignored) {
         }
         //TC04: Test when the height 0
         try {
-            new Cylinder(5, new Ray(new Vector(1, 5, 4), new Point(1, 2, 3)), 0);
+            new Cylinder(5, new Ray(new Point(1, 2, 3), new Vector(1, 5, 4)), 0);
             fail("Constructed a cylinder while a height can not be 0");
         } catch (IllegalArgumentException ignored) {
         }
         //TC03:Test when the height negative, -1
         try {
-            new Cylinder(5, new Ray(new Vector(1, 5, 4), new Point(1, 2, 3)), -1);
+            new Cylinder(5, new Ray(new Point(1, 2, 3), new Vector(1, 5, 4)), -1);
             fail("Constructed a cylinder while a height can not be negative");
         } catch (IllegalArgumentException ignored) {
         }
@@ -50,7 +50,7 @@ class CylinderTests {
      */
     @Test
     public void testGetNormal() {
-        Cylinder cyl = new Cylinder(1.0, new Ray( new Vector(0, 1, 0),new Point(0, 0, 1)), 1d);
+        Cylinder cyl = new Cylinder(1.0, new Ray(new Point(0, 0, 1), new Vector(0, 1, 0)), 1d);
 
         // ============ Equivalence Partitions Tests ==============
         // TC01: Point at a side of the cylinder

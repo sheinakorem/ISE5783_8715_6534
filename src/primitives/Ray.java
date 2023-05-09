@@ -1,9 +1,5 @@
 package primitives;
 
-import java.util.*;
-
-import static primitives.Util.isZero;
-
 /**
  * class that represents Ray
  *
@@ -31,10 +27,10 @@ public class Ray {
     /**
      * constructor that accepts a point and a vector
      *
-     * @param v= normalized vector
-     * @param p  =point
+     * @param p =point
+     * @param v = normalized vector
      */
-    public Ray(Vector v, Point p) {
+    public Ray(Point p, Vector v) {
         this.p0 = p;
         this.dir = v.normalize();
     }

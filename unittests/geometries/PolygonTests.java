@@ -94,31 +94,31 @@ public class PolygonTests {
 
         // ============ Equivalence Partitions Tests ==============
         //TC01: Ray intersects the polygon
-        result = polygon.findIntersections(new Ray(new Vector(0.5, 0.5, 3),new Point(-0.5, -0.5, -1)));
+        result = polygon.findIntersections(new Ray(new Point(-0.5, -0.5, -1), new Vector(0.5, 0.5, 3)));
 
         assertEquals(1, result.size(), "Wrong number of points");
         assertEquals(new Point(-0.33333333333333337, -0.33333333333333337, 0), result.get(0), "Ray doesn't intersect the polygon");
 
         //TC02:Ray outside against vertex
-        assertNull(polygon.findIntersections(new Ray( new Vector(0, 0, 4),new Point(0, -2, 0))), "Ray isn't outside against vertex");
+        assertNull(polygon.findIntersections(new Ray(new Point(0, -2, 0), new Vector(0, 0, 4))), "Ray isn't outside against vertex");
 
         //TC03: Ray outside against edge
-        assertNull(polygon.findIntersections(new Ray(new Vector(0, 0, 3),new Point(-1, -1, 0))), "Ray isn't outside against edge");
+        assertNull(polygon.findIntersections(new Ray(new Point(-1, -1, 0), new Vector(0, 0, 3))), "Ray isn't outside against edge");
 
         //TC04:Ray inside the polygon
-        assertNull(polygon.findIntersections(new Ray(new Vector(-1, 0, 0),new Point(0, 0, 0))), "Ray  isn't inside the polygon");
+        assertNull(polygon.findIntersections(new Ray(new Point(0, 0, 0), new Vector(-1, 0, 0))), "Ray  isn't inside the polygon");
 
         // ============ Boundary Values Tests =============
         //TC11: Ray On edge
-        result = polygon.findIntersections(new Ray(new Vector(1.03d, 0.51d, -3),new Point(-2, 0, 3)));
+        result = polygon.findIntersections(new Ray(new Point(-2, 0, 3), new Vector(1.03d, 0.51d, -3)));
         assertEquals(1, result.size(), "Wrong number of points");
         assertEquals(new Point(-0.97d, 0.51d, 0d), result.get(0), "Ray  isn't on edge of the polygon");
 
         ///TC12: Ray in vertex
-        assertNull(polygon.findIntersections(new Ray(new Vector(-2d, -1d, 3),new Point(0, 1, 0))),  "Ray  isn't on vertex of the polygon");
+        assertNull(polygon.findIntersections(new Ray(new Point(0, 1, 0), new Vector(-2d, -1d, 3))),  "Ray  isn't on vertex of the polygon");
 
         //TC13: Ray On edge's continuation
-        assertNull(polygon.findIntersections(new Ray( new Vector(-1d, -2d, 3),new Point(-1, 2, 0))), "Ray  isn't On edge's continuation");
+        assertNull(polygon.findIntersections(new Ray(new Point(-1, 2, 0), new Vector(-1d, -2d, 3))), "Ray  isn't On edge's continuation");
 
 
     }

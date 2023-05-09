@@ -1,7 +1,6 @@
 package geometries;
 
 import org.junit.jupiter.api.Test;
-import primitives.Double3;
 import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
@@ -20,16 +19,16 @@ class GeometriesTests {
 
         // =============== Boundary Values Tests ==================
         //TC01: empty geometries list
-        assertNull(geometries.findIntersections(new Ray(new Vector(1.0, 0.0, 5.0), new Point(0.0, 1.0, 0.0))));
+        assertNull(geometries.findIntersections(new Ray(new Point(0.0, 1.0, 0.0), new Vector(1.0, 0.0, 5.0))));
 
         geometries.add(new Plane(new Point(1.0, 1.0, 0.0), new Vector(0.0, 0.0, 1.0)));
         geometries.add(new Triangle(new Point(1.0, 0.0, 0.0), new Point(0.0, 1.0, 0.0), new Point(0.0, 0.0, 1.0)));
         geometries.add(new Sphere(1.0, new Point(1.0, 0.0, 0.0)));
 
         //TC02: each geometry doesn't have intersection points
-        assertNull(geometries.findIntersections(new Ray(new Vector(0.0, -1.0, 0.0), new Point(0.0, 0.0, 2.0))));
+        assertNull(geometries.findIntersections(new Ray(new Point(0.0, 0.0, 2.0), new Vector(0.0, -1.0, 0.0))));
 
-        List<Point> points = geometries.findIntersections(new Ray(new Vector(0.0, 0.0, 1.0), new Point(0.0, 5.0, -1.0)));
+        List<Point> points = geometries.findIntersections(new Ray(new Point(0.0, 5.0, -1.0), new Vector(0.0, 0.0, 1.0)));
         //TC03: just one geometry has intersections point
         assertEquals(1, points.size());
 
@@ -49,12 +48,12 @@ class GeometriesTests {
                 )
         );
         List<Point> result;
-        result = geometries1.findIntersections(new Ray(new Vector(0, 0, 1), new Point(0.2, 0.2, -0.6)));
+        result = geometries1.findIntersections(new Ray(new Point(0.2, 0.2, -0.6), new Vector(0, 0, 1)));
         assertEquals(4, result.size(), "All geometries intersects");
 
         // ============ Equivalence Partitions Tests ==============
         //TC11: part of the geometries has intersection points
-        assertEquals(2, geometries.findIntersections(new Ray(new Vector(0.0, 0.0, 1.0), new Point(1.0, 0.0, -1.0))).size());
+        assertEquals(2, geometries.findIntersections(new Ray(new Point(1.0, 0.0, -1.0), new Vector(0.0, 0.0, 1.0))).size());
     }
 }
 
