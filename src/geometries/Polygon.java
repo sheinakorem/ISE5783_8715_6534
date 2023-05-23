@@ -1,5 +1,6 @@
 package geometries;
 
+import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
 import java.util.List;
@@ -14,7 +15,7 @@ import primitives.Vector;
  *
  * @author Dan
  */
-public class Polygon implements Geometry {
+public class Polygon extends Geometry {
     /**
      * List of polygon's vertices
      */
@@ -92,46 +93,39 @@ public class Polygon implements Geometry {
         return plane.getNormal();
     }
 
+
+    /**
+     * find all intersections of recieved ray with the polygon
+     * @param ray the ray
+     * @return list of GeopPoints- intersection points with the polygon
+     */
     @Override
-    public List<Point> findIntersections(Ray ray) {
-        List<Point>result=plane.findIntersections(ray);
-
-        if (result==null){
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+        List<GeoPoint> intersections = plane.findGeoIntersections(ray);
+        if (intersections == null)
             return null;
-        }
 
-        int numV=vertices.size();
-        Point p0 = ray.getP0();
+        Point p0 = ray.getP0(); //the start ray point
         Vector v = ray.getDir();
 
-        Vector v1=vertices.get(numV-1).subtract(p0);
-        Vector v2=vertices.get(0).subtract(p0);
-
-        Vector n= v1.crossProduct(v2).normalize();
-        double vn=v.dotProduct(n);
-        boolean positive= vn>0;
-
-        if(isZero(vn)){
+        Vector v1  = vertices.get(1).subtract(p0); //vector from the ray start point to the polygon vertices
+        Vector v2 = vertices.get(0).subtract(p0); //vector from the ray start point to the polygon vertices
+        double sign = v.dotProduct(v1.crossProduct(v2));
+        if (isZero(sign))//out of the polygon
             return null;
+
+        boolean positive = sign > 0;
+
+        for (int i = vertices.size() - 1; i > 0; --i) { //foreach vertices
+            v1 = v2;
+            v2 = vertices.get(i).subtract(p0);//vector from the ray start point to the polygon vertices
+            sign = alignZero(v.dotProduct(v1.crossProduct(v2)));
+            if (isZero(sign)) return null; //out of the polygon
+            if (positive != (sign >0)) return null;//out of the polygon
         }
 
-        for(int i=1; i<numV; ++i){
-            v1=v2;
-            v2=vertices.get(i).subtract(p0);
-            n=v1.crossProduct(v2).normalize();
-            vn=v.dotProduct(n);
+        intersections.get(0).geometry = this;
 
-            //no intersection
-            if(isZero(vn)){
-                return null;
-            }
-
-            //not the same sign
-            if(vn>0 != positive){
-                return null;
-            }
-        }
-
-        return List.of(result.get(0));
+        return intersections;
     }
 }

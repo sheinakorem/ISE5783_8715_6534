@@ -14,7 +14,7 @@ import static primitives.Util.isZero;
  *
  * @author michal slutzkin & sheina korem
  */
-public class Plane implements Geometry {
+public final class Plane extends Geometry {
 
     private final Point q0;
     private final Vector normal;
@@ -88,78 +88,30 @@ public class Plane implements Geometry {
      * @param ray
      * @return
      */
+
+
+
+
     @Override
-    public List<Point> findIntersections(Ray ray) {
-        Vector v = ray.getDir();
-        Point p0 = ray.getP0();
-
-        Vector n = normal;
-
-        if (q0.equals(p0)) {
-            return null;
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+        Vector p0Q;
+        try {
+            p0Q = q0.subtract(ray.getP0());
+        } catch (IllegalArgumentException e) {
+            return null; // ray starts from point Q - no intersections
         }
 
-        Vector P0_Q0 = q0.subtract((p0));
-
-        //numerator
-        double nP0Q0 = alignZero(n.dotProduct(P0_Q0));
-
-        //
-        if (isZero(nP0Q0)) {
+        double nv = normal.dotProduct(ray.getDir());
+        if (isZero(nv)) // ray is parallel to the plane - no intersections
             return null;
-        }
 
-        //denominator
-        double nv = alignZero(n.dotProduct(v));
-
-        //ray is lying in the plane axis
-        if (isZero(nv)) {
-            return null;
-        }
-
-        double t = alignZero(nP0Q0 / nv);
+        double t = alignZero(normal.dotProduct(p0Q) / nv);
 
         if (t <= 0) {
             return null;
         }
 
-        Point point = ray.getPoint(t);
-        return List.of(point);
-
-  /*      Vector v = ray.getDir();
-        Point p0 = ray.getP0();
-
-        //Ray on the plane
-        if (q0.equals(p0)) {
-            return null;
-        }
-
-        double nqp = normal.dotProduct(q0.subtract(p0));
-
-        //Ray on the plane
-        if (isZero(nqp)) {
-            return null;
-        }
-
-        double nv = normal.dotProduct(v);
-
-        if (isZero(nv)) {
-            return null;
-        }
-
-        double t = alignZero(nqp / nv);
-
-        //Ray after the plane
-        if (t < 0) {
-            return null;
-        }
-
-        Point P = ray.getPoint(t);
-
-
-        //Ray crosses the plane
-        return List.of(P);
-    }*/
-
+        GeoPoint geo = new GeoPoint(this, ray.getPoint(t));
+        return List.of(geo);
     }
 }

@@ -3,6 +3,7 @@ package renderer;
 import primitives.Color;
 import primitives.Ray;
 import scene.Scene;
+import geometries.Intersectable.GeoPoint;
 
 public abstract class RayTracerBase {
 

@@ -2,43 +2,43 @@ package lighting;
 
 import primitives.Color;
 import primitives.Double3;
+import primitives.Point;
+import primitives.Vector;
 
-public class AmbientLight {
+/**
+ * Class Ambient Light represents the ambient light in a scene, the basic lighting.
+ */
 
-    private Color intensity;
-    public static final AmbientLight NONE = new AmbientLight(Color.BLACK, Double3.ZERO);
+public class AmbientLight extends Light{
     /**
-     * create AmbientLight of the scene
-     * @param Ia the color of ambientLight
-     * @param Ka factor of the ambientLight
+     * constructor for Ambient Light
+     * @param Ia intensity of light
+     * @param Ka attenuation factor
      */
-    public AmbientLight(Color Ia , Double3 Ka) {
-        intensity=Ia.scale(Ka);
+    public AmbientLight(Color Ia, double Ka) {
+        super(Ia.scale(Ka));
     }
-    public AmbientLight(Color Ia , double Ka) {
-
-        intensity=Ia.scale(Ka);
+    public AmbientLight(Color Ia, Double3 Ka) {
+        super(Ia.scale(Ka));
     }
+    public AmbientLight(){super(Color.BLACK);}
 
-
-    /**
-     * default constructor that create ambientLight in black
-     */
-    public AmbientLight( ) {
-        Color Ia=Color.BLACK;
-    }
-
-    protected AmbientLight(Color intensity) {
-        this.intensity = intensity;
-    }
 
     /**
-     * Returns intensity of the light.
-     * @return A shallow copy of the color.
+     * @param p
+     * @return
      */
-    public Color getIntensity() {
-        return intensity;
+    @Override
+    public Color getIntensity(Point p) {
+        return null;
     }
 
-
+    /**
+     * @param p
+     * @return
+     */
+    @Override
+    public Vector getL(Point p) {
+        return null;
+    }
 }

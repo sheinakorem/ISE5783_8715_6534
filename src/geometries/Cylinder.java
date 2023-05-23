@@ -79,20 +79,20 @@ public class Cylinder extends Tube {
         return p.subtract(o).normalize();
     }
     @Override
-    public List<Point> findIntersections(Ray ray) {
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
         Point p0 = axisRay.getP0();
         Point p1 = axisRay.getPoint(height);
-        List<Point> result = null;
+        List<GeoPoint> result = null;
 
         // Find the tube's intersections
-        List<Point> tubePoints = super.findIntersections(ray);
+        List<GeoPoint> tubePoints = super.findGeoIntersections(ray);
         if (tubePoints != null) {
             if (tubePoints.size() == 2) {
                 // Checks if the intersection points are on the cylinder
-                Point q0 = tubePoints.get(0);
-                Point q1 = tubePoints.get(1);
-                boolean q0Intersects = isBetweenCaps(q0);
-                boolean q1Intersects = isBetweenCaps(q1);
+                GeoPoint q0 = tubePoints.get(0);
+                GeoPoint q1 = tubePoints.get(1);
+                boolean q0Intersects = isBetweenCaps(q0.point);
+                boolean q1Intersects = isBetweenCaps(q1.point);
 
                 if (q0Intersects && q1Intersects) {
                     return tubePoints;
@@ -109,8 +109,8 @@ public class Cylinder extends Tube {
 
             if (tubePoints.size() == 1) {
                 // Checks if the intersection point is on the cylinder
-                Point q = tubePoints.get(0);
-                if (isBetweenCaps(q)) {
+                GeoPoint q = tubePoints.get(0);
+                if (isBetweenCaps(q.point)) {
                     result = new LinkedList<>();
                     result.add(q);
                 }
@@ -118,11 +118,11 @@ public class Cylinder extends Tube {
         }
 
         // Finds the bottom cap's intersections
-        List<Point> cap0Point = bottomCap.findIntersections(ray);
+        List<GeoPoint> cap0Point = bottomCap.findGeoIntersections(ray);
         if (cap0Point != null) {
             // Checks if the intersection point is on the cap
-            Point gp = cap0Point.get(0);
-            if (gp.distanceSquared(p0) < radius * radius) {
+            GeoPoint gp = cap0Point.get(0);
+            if (gp.point.distanceSquared(p0) < radius * radius) {
                 if (result == null) {
                     result = new LinkedList<>();
                 }
@@ -135,11 +135,11 @@ public class Cylinder extends Tube {
         }
 
         // Finds the top cap's intersections
-        List<Point> cap1Point = topCap.findIntersections(ray);
+        List<GeoPoint> cap1Point = topCap.findGeoIntersections(ray);
         if (cap1Point != null) {
             // Checks if the intersection point is on the cap
-            Point gp = cap1Point.get(0);
-            if (gp.distanceSquared(p1) < radius * radius) {
+            GeoPoint gp = cap1Point.get(0);
+            if (gp.point.distanceSquared(p1) < radius * radius) {
                 if (result == null) {
                     return List.of(gp);
                 }
@@ -150,6 +150,8 @@ public class Cylinder extends Tube {
 
         return result;
     }
+
+
     /**
      * Helper function that checks if a points is between the two caps (not on them, even on the edge)
      * @param p The point that will be checked.

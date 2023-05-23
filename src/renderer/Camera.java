@@ -143,7 +143,7 @@ public class Camera {
      * @return The Camera object itself
      */
 
-    public void renderImage() {
+    public Camera renderImage() {
         try {
             // if one of the fields hasn't been initialized throw an exception
             if (imageWriter == null) {
@@ -170,6 +170,7 @@ public class Camera {
         } catch (MissingResourceException e) {
             throw new UnsupportedOperationException("Not implemented yet" + e.getClassName());
         }
+        return  this;
     }
 
 

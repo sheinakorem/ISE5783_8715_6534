@@ -3,13 +3,10 @@ package geometries;
 import primitives.Point;
 import primitives.Ray;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 
-public class Geometries implements Intersectable {
+public class Geometries extends Intersectable {
 
     /**
      * List of intersectables
@@ -43,23 +40,26 @@ public class Geometries implements Intersectable {
         Collections.addAll(this.intersectables, intersectables);
     }
 
+    /**
+     * the function gets a ray and returns list of intersection points of the ray with all the geometries in the scene
+     * @param ray the ray
+     * @return list of Point3D that intersect the osef
+     */
     @Override
-    public List<Point> findIntersections(Ray ray) {
-        List<Point> result = new LinkedList<>();
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+        List<GeoPoint> intersections = null;
+
         for (var elem : intersectables) {
-            List<Point> elemPoints = elem.findIntersections(ray);
-            if (elemPoints != null) {
-                result.addAll(elemPoints);
+            List<GeoPoint> tempIntersections = elem.findGeoIntersections(ray);
+            if (tempIntersections != null) {
+                if (intersections == null)
+                    intersections = new ArrayList<GeoPoint>();
+                intersections.addAll(tempIntersections);
             }
-        }
 
-        if(result.isEmpty()){
-            return  null;
         }
-
-        return result;
+        return intersections;
     }
-
 }
 
 
