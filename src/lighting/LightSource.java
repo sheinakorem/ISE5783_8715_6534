@@ -7,7 +7,7 @@ import primitives.Vector;
 /**
  * Light Source is an interface that is implemented only by lights that are light sources.
  */
-public interface LightSource {
+public interface LightSource  {
     /**
      * Get intensity of light from light source on point
      * @param p point

@@ -33,7 +33,7 @@ public class RayTracerBasic extends RayTracerBase {
      */
     public RayTracerBasic(Scene scene) {
         super(scene);
-    }
+     }
 
 
 

@@ -11,7 +11,7 @@ abstract  class Light {
   * Constructor for light
   * @param intensity intensity (color) of light
   */
-  public Light(Color intensity) {
+  public Light(Color intensity)  {
   this.intensity = intensity;
  }
 

@@ -38,7 +38,7 @@ public class Geometries extends Intersectable {
      */
     public void add(Intersectable... intersectables) {
         Collections.addAll(this.intersectables, intersectables);
-    }
+     }
 
     /**
      * the function gets a ray and returns list of intersection points of the ray with all the geometries in the scene

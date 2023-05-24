@@ -10,7 +10,7 @@ import static primitives.Util.isZero;
  * class that inserts from polygon and represents a Triangle
  * @author michal slutzkin & sheina korem
  */
-public class Triangle extends Polygon{
+public class Triangle extends Polygon {
     /**
      * constructor for Triangle . uses the Polygon constructor
      * @param p1=p1

@@ -31,7 +31,7 @@ public abstract class Geometry extends Intersectable{
     public Geometry setMaterial(Material material) {
         this.material = material;
         return this;
-    }
+     }
     protected Color emission=Color.BLACK;
 
     /**

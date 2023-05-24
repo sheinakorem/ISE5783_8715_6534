@@ -93,7 +93,7 @@ public final class Plane extends Geometry {
 
 
     @Override
-    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray)  {
         Vector p0Q;
         try {
             p0Q = q0.subtract(ray.getP0());

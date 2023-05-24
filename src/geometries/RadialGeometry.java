@@ -6,7 +6,7 @@ import primitives.Ray;
  * class for geometric shapes with radius
  * @author michal slutzkin & sheina korem
  */
-public abstract class RadialGeometry extends Geometry{
+public abstract class RadialGeometry extends Geometry {
      protected double radius;
 
      /**

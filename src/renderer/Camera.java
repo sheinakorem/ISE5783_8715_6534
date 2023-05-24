@@ -95,7 +95,7 @@ public class Camera {
      * @param rayTracer The RayTracerBase object
      * @return The Camera object itself
      */
-    public Camera setRayTracer(RayTracerBase rayTracer) {
+    public Camera setRayTracer(RayTracerBase rayTracer)  {
         this.rayTracer = rayTracer;
         return this;
     }

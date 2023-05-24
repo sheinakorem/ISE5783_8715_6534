@@ -18,7 +18,7 @@ public class Material {
     public Material setkD(Double3 kD) {
         this.kD = kD;
         return this;
-    }
+     }
 
     /**
      * set with Double3
