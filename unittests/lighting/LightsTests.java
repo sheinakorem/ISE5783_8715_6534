@@ -90,7 +90,7 @@ public class LightsTests {
     public void spherePoint() {
         scene1.getGeometries().add(sphere);
         scene1.getLights().add(new PointLight(sphereLightColor, sphereLightPosition)
-                .setKl(0.001).setKq(0.0002));
+                .setKl(new Double3(0.001)).setKq(new Double3(0.0002)));
 
         ImageWriter imageWriter = new ImageWriter("lightSpherePoint", 500, 500);
         camera1.setImageWriter(imageWriter) //
@@ -106,7 +106,7 @@ public class LightsTests {
     public void sphereSpot() {
         scene1.getGeometries().add(sphere);
         scene1.getLights().add(new SpotLight(sphereLightColor, sphereLightPosition, new Vector(1, 1, -0.5))
-                .setKl(0.001).setKq(0.0001));
+                .setKl(new Double3(0.001)).setKq(new Double3(0.0001)));
 
         ImageWriter imageWriter = new ImageWriter("lightSphereSpot", 500, 500);
         camera1.setImageWriter(imageWriter) //

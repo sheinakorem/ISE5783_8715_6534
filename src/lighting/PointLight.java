@@ -1,43 +1,53 @@
 package lighting;
 
 import primitives.Color;
+import primitives.Double3;
 import primitives.Point;
 import primitives.Vector;
 
-public class PointLight extends Light implements  LightSource{
+public class PointLight extends Light implements LightSource {
 
-    Point position;
+    private final Point position;
 
-    double kC=1; // Constant attenuation
-    double kL=0; // Linear attenuation
-    double kQ=0; // Quadratic attenuation
+    private Double3 kC = Double3.ONE; // Constant attenuation
+    private Double3 kL = Double3.ZERO; // Linear attenuation
+    private Double3 kQ = Double3.ZERO; // Quadratic attenuation
 
-    public PointLight setKc(double kC) {
+    public PointLight setKc(Double3 kC) {
         this.kC = kC;
         return this;
     }
+    public PointLight setKc(double kC) {
+        this.kC = new Double3(kC);
+        return this;
+    }
 
-    public PointLight setKl(double kL) {
+    public PointLight setKl(Double3 kL) {
         this.kL = kL;
         return this;
     }
+    public PointLight setKl(double kL) {
+        this.kL = new Double3(kL);
+        return this;
+    }
 
-    public PointLight setKq(double kQ) {
+    public PointLight setKq(Double3 kQ) {
         this.kQ = kQ;
         return this;
     }
+    public PointLight setKq(double kQ) {
+        this.kQ = new Double3(kQ);
+        return this;
+    }
+
     /**
      * Constructor for light
      *
-     * @param intensity intensity (color) of light
+     * @param colorIntensity intensity (color) of light
      */
-    public PointLight(Color intensity) {
-        super(intensity);
-    }
 
-    public PointLight(Color colorIntensity, Point position, double kC, double kL, double kQ) {
-        super(colorIntensity);
-        this.position = position;
+    public PointLight(Color colorIntensity, Point position, Double3 kC, Double3 kL, Double3 kQ) {
+        this(colorIntensity, position);
         this.kC = kC;
         this.kL = kL;
         this.kQ = kQ;
@@ -46,34 +56,36 @@ public class PointLight extends Light implements  LightSource{
     /**
      * constructor for point light
      * by default, the constant attenuation value is 1 and the other two values are 0
+     *
      * @param colorIntensity intensity (color) of light
-     * @param position position of light
+     * @param position       position of light
      */
     public PointLight(Color colorIntensity, Point position) {
-
-        this(colorIntensity, position, 1d, 0d, 0d);
-    }
+        super(colorIntensity);
+        this.position = position;
+     }
 
     /**
      * dummy overriding Light getIntensity()
+     *
      * @return light intensity
      */
     @Override
     public Color getIntensity() {
         return super.getIntensity();
-     }
+    }
 
     /**
      * overriding LightSource getIntensity(Point3D)
+     *
      * @param p point
      * @return intensity of light from light source on certain point
      */
     @Override
     public Color getIntensity(Point p) {
-        double dsquared = p.distanceSquared(position);
         double d = p.distance(position);
 
-        return (getIntensity().reduce(kC + kL * d + kQ * dsquared));
+        return (getIntensity().reduce(kC.add(kL.scale(d)).add(kQ.scale(d * d))));
     }
 
     /**
@@ -86,5 +98,16 @@ public class PointLight extends Light implements  LightSource{
             return null;
         }
         return p.subtract(position).normalize();
+    }
+
+    /**
+     * return distance between light source and given point
+     *
+     * @param point to calculate distance
+     * @return distance
+     */
+    @Override
+    public double getDistance(Point point) {
+        return position.distance(point);
     }
 }

@@ -1,9 +1,8 @@
 package geometries;
 
-import primitives.Color;
-import primitives.Material;
-import primitives.Vector;
-import primitives.Point;
+import primitives.*;
+
+import java.util.List;
 
 /**
  * An interface called  Geometry for geometric shapes
@@ -59,4 +58,6 @@ public abstract class Geometry extends Intersectable{
      */
     abstract  public Vector getNormal(Point p);
 
+
+   // protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance);
 }

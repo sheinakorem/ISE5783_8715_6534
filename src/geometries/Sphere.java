@@ -5,6 +5,7 @@ import primitives.*;
 import java.util.List;
 
 import static primitives.Util.alignZero;
+import static primitives.Util.isZero;
 
 /**
  * class that inherits from RationalGeometry and represents sphere
@@ -38,22 +39,31 @@ public class Sphere extends RadialGeometry {
      */
     @Override
     public Vector getNormal(Point point) {
-        return point.subtract(center).normalize();
+        //return point.subtract(center).normalize();
+
+        return point.subtract(center).normalize().scale(-1);
+
     }
 
-
-
-    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+    /**
+     * @param ray
+     * @param maxDistance
+     * @return
+     */
+    @Override
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
         Point p0 = ray.getP0();
         Vector v = ray.getDir();
-        Vector u;
+        Vector cTOs;
         try {
-            u = center.subtract(p0);//vector from camera to center of sphere
-        } catch (IllegalArgumentException e) { //if p0 == _center it is illegal
+            //vector from camera to center of sphere
+            cTOs = center.subtract(p0);
+            //if p0 == _center it is illegal
+        } catch (IllegalArgumentException e) {
             return List.of(new GeoPoint(this,(ray.getPoint(radius))));
         }
-        double tm = alignZero(v.dotProduct(u));
-        double dSquared = (tm == 0) ? u.lengthSquared() : u.lengthSquared() - tm * tm;
+        double tm = alignZero(v.dotProduct(cTOs));
+        double dSquared = (tm == 0) ? cTOs.lengthSquared() : cTOs.lengthSquared() - tm * tm;
         double thSquared = alignZero(radius * radius - dSquared);
 
         if (thSquared <= 0) return null;
@@ -63,18 +73,30 @@ public class Sphere extends RadialGeometry {
 
         double t1 = alignZero(tm - th);
         double t2 = alignZero(tm + th);
-        if (t1 <= 0 && t2 <= 0) return null;
-        if (t1 > 0 && t2 > 0) {
-            return List.of(
-                    new GeoPoint(this,(ray.getPoint(t1)))
-                    ,new GeoPoint(this,(ray.getPoint(t2)))); //P1 , P2
-        }
-        if (t1 > 0)
-            return List.of(new GeoPoint(this,(ray.getPoint(t1))));
-        else
-            return List.of(new GeoPoint(this,(ray.getPoint(t2))));
-    }
+        Point P1 =ray.getPoint(t1);
+        Point P2 =ray.getPoint(t2);
 
+        // ray constructed outside sphere
+        // two intersection points
+        if (t1 > 0 && t2 > 0 ) {
+
+            return List.of(new GeoPoint(this,P1), new GeoPoint (this,P2));
+        }
+        // ray constructed inside sphere and intersect in back direction
+        if (t1 > 0 && alignZero(t1-maxDistance) <= 0 ) {
+            return List.of(new GeoPoint(this,P1));
+        }
+        // ray constructed inside sphere and intersect in forward direction
+        if (t2 > 0 && alignZero(t2-maxDistance) <= 0 ) {
+
+            return List.of(new GeoPoint (this,P2));
+        }
+        // no intersection points found - assurance return
+        // code should not be reaching this point
+        return null;
+    }
 }
+
+
 
 

@@ -153,4 +153,31 @@ class SphereTests {
                 "Ray orthogonal to ray head -> O line");
 
     }
-}
+    /**
+     * Test method for {@link geometries.Plane#findGeoIntersectionsHelper(Ray, double)}
+     */
+    @Test
+    void findGeoIntersectionsHelperTest1() {
+
+        //region *** test including consideration that points are closer to ray origin than maxDistance parameter
+        // ray and sphere intersect twice at (0,0,3) and (0,6,3)
+        Sphere sphere1 = new Sphere(3, new Point(0, 3, 3));
+        Ray ray = new Ray(new Point(0, -4, 3), new Vector(0, 1, 0));
+        Intersectable.GeoPoint gp1 = new Intersectable.GeoPoint(sphere1, new Point(0, 0, 3));
+        Intersectable.GeoPoint gp2 = new Intersectable.GeoPoint(sphere1, new Point(0, 6, 3));
+
+        // TC01 -  max distance is smaller than distance to both intersection points - no intersections
+        assertNull(sphere1.findGeoIntersectionsHelper(ray, 2), "points are further than maxDistance");
+
+        /**
+         * Test method for {@link geometries.Sphere#findGeoIntersectionsHelper(Ray, double)}
+         */
+        //TC02 -  max distance is smaller than distance to second intersection point - one intersection point
+        List<Intersectable.GeoPoint> res1 = sphere1.findGeoIntersectionsHelper(ray, 5);
+        assertEquals(List.of(gp1), res1, "one point only is in boundary");
+
+        //TC03 -  distance to both points is smaller than maxDistance - two intersection points
+        List<Intersectable.GeoPoint> res2 = sphere1.findGeoIntersectionsHelper(ray, 12);
+        assertEquals(List.of(gp1, gp2), res2, "one point only is in boundary");
+    }
+    }

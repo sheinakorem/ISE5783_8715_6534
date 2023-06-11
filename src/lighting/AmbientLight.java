@@ -29,15 +29,6 @@ public class AmbientLight extends Light{
      * @return
      */
     @Override
-    public Color getIntensity(Point p) {
-        return null;
-    }
-
-    /**
-     * @param p
-     * @return
-     */
-    @Override
     public Vector getL(Point p) {
         return null;
     }

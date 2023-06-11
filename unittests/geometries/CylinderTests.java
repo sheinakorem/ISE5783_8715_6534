@@ -5,6 +5,8 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CylinderTests {
@@ -76,4 +78,25 @@ class CylinderTests {
         assertEquals(new Vector(0, 1, 0), cyl.getNormal(new Point(0, 1, 2)), "Bad normal to edge with upper base");
 
     }
+
+//    /**
+//     * Test method for {@link geometries.Plane#findGeoIntersectionsHelper(Ray, double)}
+//     */
+//    @Test
+//    void findGeoIntersectionsHelperTest1() {
+//        Cylinder cylinder = new Cylinder(1d, new Ray(new Point(2, 0, 0), new Vector(0, 0, 1)), 2d);
+//        List<Intersectable.GeoPoint> res = null;
+//
+//        res = cylinder.findGeoIntersectionsHelper(new Ray(new Point(-1, 0, 1), new Vector(1, 0, 0)), 1d);
+//        assertNull(res, "wrong zero intersections");
+//
+//
+//        res = cylinder.findGeoIntersectionsHelper(new Ray(new Point(-1, 0, 1), new Vector(1, 0, 0)), 2.5d);
+//        assertEquals(1, res.size(), "wrong one point intersections");
+//
+//
+//        res = cylinder.findGeoIntersectionsHelper(new Ray(new Point(-1, 0, 1), new Vector(1, 0, 0)), 5d);
+//        assertEquals(2, res.size(), "wrong two point intersections");
+//
+//    }
 }

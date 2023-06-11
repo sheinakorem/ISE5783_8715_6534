@@ -5,7 +5,7 @@ import primitives.Point;
 import primitives.Vector;
 
 abstract  class Light {
- private Color intensity;
+ private final Color intensity;
 
  /**
   * Constructor for light
@@ -24,7 +24,7 @@ abstract  class Light {
   return intensity;
  }
 
- public abstract Color getIntensity(Point p);
+ //public abstract Color getIntensity(Point p);
 
  public abstract Vector getL(Point p);
 }

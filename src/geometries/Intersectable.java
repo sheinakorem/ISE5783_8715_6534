@@ -9,14 +9,15 @@ import java.util.Objects;
 public abstract class Intersectable {
 
     public List<Point> findIntersections(Ray ray) {
-        var geoList = findGeoIntersections(ray);
+        List<GeoPoint> geoList = findGeoIntersections(ray);
         return geoList == null ? null : geoList.stream().map(gp -> gp.point).toList();
     }
-    public List<GeoPoint> findGeoIntersections(Ray ray) {
-        return findGeoIntersectionsHelper(ray);
-    }
+    //public List<GeoPoint> findGeoIntersections(Ray ray) {
+     //   return findGeoIntersectionsHelper(ray);
+   // }
 
-    protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray);
+   // protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance);
+
     /**
      * Represents a geographic point with associated geometry and coordinates.
      */
@@ -69,5 +70,14 @@ public abstract class Intersectable {
                     ", point=" + point ;
         }
     }
+    protected abstract List<GeoPoint>
+    findGeoIntersectionsHelper(Ray ray, double maxDistance);
+    public final List<GeoPoint> findGeoIntersections(Ray ray) {
+        return findGeoIntersections(ray, Double.POSITIVE_INFINITY);
+    }
+    public final List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
+        return findGeoIntersectionsHelper(ray, maxDistance);
+    }
+
 
 }

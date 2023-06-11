@@ -45,8 +45,9 @@ public class Geometries extends Intersectable {
      * @param ray the ray
      * @return list of Point3D that intersect the osef
      */
+
     @Override
-    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
         List<GeoPoint> intersections = null;
 
         for (var elem : intersectables) {

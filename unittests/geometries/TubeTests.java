@@ -55,5 +55,11 @@ class TubeTests {
         assertEquals(new Vector(0,-1,0), tube.getNormal(new Point(1,0,2)), "Bad normal to tube");
 
     }
+    /**
+     * Test method for {@link geometries.Plane#findGeoIntersectionsHelper(Ray, double)}
+     */
+    @Test
+    void findGeoIntersectionsHelperTest1() {
 
+    }
 }

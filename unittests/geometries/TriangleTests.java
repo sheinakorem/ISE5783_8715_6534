@@ -119,4 +119,26 @@ class TriangleTests {
         //TC13: Ray On edge's continuation
         assertNull(triangle.findIntersections(new Ray(new Point(0,-0.5d,1.5d), new Vector(-2.31d,-1d,-1.5d))),"Ray On edge's continuation");
     }
+    @Test
+    void findGeoIntersectionsHelperTest1() {
+        //region ***test for intersection points with consideration to maxDistance parameter
+        Triangle tri1 = new Triangle(
+                new Point(-1, 0, 0),
+                new Point(1, 0, 0),
+                new Point(0, 0, 1));
+        Ray ray = new Ray(new Point(0, -3, 0.5), new Vector(0, 1, 0));
+        Intersectable.GeoPoint gp1 = new Intersectable.GeoPoint(tri1, new Point(0, 0, 0.5));
+
+        /**
+         * Test method for {@link Triangle#findGeoIntersectionsHelper(Ray, double)}
+         */
+        // TC01 -  max distance is smaller than distance to intersection point - no intersections
+        assertNull(tri1.findGeoIntersectionsHelper(ray, 2), "points are further than maxDistance");
+        /**
+         * Test method for {@link Triangle#findGeoIntersectionsHelper(Ray, double)}
+         */
+        //TC02 -  max distance is larger than distance to  intersection point - one intersection point
+        List<Intersectable.GeoPoint> res = tri1.findGeoIntersectionsHelper(ray, 5);
+        assertEquals(List.of(gp1), res, "point is in boundary");
+    }
 }

@@ -6,10 +6,12 @@ public class Material {
     /**
      * factors
      */
-    public Double3 kD = new Double3(0);
-    public Double3 kS= new Double3(0);
+    public Double3 kD = Double3.ZERO;
+    public Double3 kS= Double3.ZERO;
     public int nShininess=0;
 
+    public Double3 kT=Double3.ZERO;
+    public Double3 kR=Double3.ZERO;
     /**
      * set with Double3
      * @param kD
@@ -49,6 +51,25 @@ public class Material {
         return this;
     }
 
+    public Material setkT(Double3 kT) {
+        this.kT = kT;
+        return this;
+    }
+
+    public Material setkR(Double3 kR) {
+        this.kR = kR;
+        return this;
+    }
+
+    public Material setkT(double kT) {
+        this.kT = new Double3(kT);
+        return this;
+    }
+
+    public Material setkR(double kR) {
+        this.kR = new Double3(kR);
+        return this;
+    }
     /**
      * set nShininess
      * @param nShininess

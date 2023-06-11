@@ -114,16 +114,16 @@ public class Camera {
         Point Pc = p0.add(vTo.scale(distance));
 
         //pixel ratios
-        double Ry = height / nY;
-        double Rx = width / nX;
+        double Ry = (double)height / nY;
+        double Rx = (double)width / nX;
 
         //Point of the center pixel in Nx,Ny coordinates
         // starting from view plane center
         Point Pij = Pc;
 
         //offsets for Pij
-        double Yi = -(i - (nY - 1) / 2.0) * Ry;
-        double Xj = (j - (nX - 1) / 2.0) * Rx;
+        double Yi = -(i - (nY - 1) /2d) * Ry;
+        double Xj = (j - (nX - 1) / 2d) * Rx;
 
         //adding opffsts if necessary
         if (!isZero(Xj)) {
@@ -134,7 +134,7 @@ public class Camera {
         }
 
         // return ray from camera through view plane Pij
-        return new Ray(p0, Pij.subtract(p0).normalize());
+        return new Ray(p0, Pij.subtract(p0));
     }
 
     /**
@@ -202,13 +202,14 @@ public class Camera {
      * Function renderImage produces unoptimized png file of the image according to
      * pixel color matrix in the directory of the project
      */
-    public void writeToImage() {
+    public Camera writeToImage() {
         // if imageWriter hasn't been initialized throw an exception
         if (imageWriter == null) {
             throw new MissingResourceException("missing resource", ImageWriter.class.getName(), "");
         }
 
         imageWriter.writeToImage();
+        return this;
     }
 
 }

@@ -79,13 +79,19 @@ public class Cylinder extends Tube {
         return p.subtract(o).normalize();
     }
     @Override
-    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray,double maxDistance) {
         Point p0 = axisRay.getP0();
         Point p1 = axisRay.getPoint(height);
         List<GeoPoint> result = null;
 
         // Find the tube's intersections
-        List<GeoPoint> tubePoints = super.findGeoIntersections(ray);
+        List<GeoPoint> tubePoints = super.findGeoIntersections(ray,maxDistance);
+
+        double distance = tubePoints.get(0).point.distance(ray.getP0());
+        //check that the intersection point is closer to ray origin
+        if(alignZero(distance-maxDistance)>0)
+        {
+            return null; }
         if (tubePoints != null) {
             if (tubePoints.size() == 2) {
                 // Checks if the intersection points are on the cylinder

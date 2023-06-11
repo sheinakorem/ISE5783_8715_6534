@@ -22,9 +22,18 @@ public class Triangle extends Polygon {
    }
 
     @Override
-    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
-        List<GeoPoint> intersections = plane.findGeoIntersections(ray);
-        if (intersections == null) return null;//there are no intersection points
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray,double maxDistance) {
+        List<GeoPoint> intersections = plane.findGeoIntersections(ray,maxDistance);
+        if (intersections == null) {
+            return null;//there are no intersection points
+        }
+        double distance = intersections.get(0).point.distance(ray.getP0());
+        //check that the intersection point is closer to ray origin
+        if(alignZero(distance-maxDistance)>0)
+        {
+            return null;
+        }
+
 
         Point p0 = ray.getP0();//the start ray point
         Vector v = ray.getDir();
