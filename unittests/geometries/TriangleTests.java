@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Unit tests for geometries.Triangle class
+ *
  * @author michal slutzkin & sheina korem
  */
 class TriangleTests {
@@ -84,6 +85,7 @@ class TriangleTests {
         assertEquals(new Vector(n, n, n), triangle.getNormal(new Point(0, 0, 1)), "Bad normal to triangle");
 
     }
+
     /**
      * Test method for {@link Triangle#findIntersections(Ray)}.
      */
@@ -113,12 +115,14 @@ class TriangleTests {
 
         // ============ Boundary Values Tests =============
         //TC11: Ray On edge
-        assertNull(triangle.findIntersections(new Ray(new Point(0,0.5d,0.5d), new Vector(-2.9d,0.85d,-0.5d))),"Ray On edge");
+        assertNull(triangle.findIntersections(new Ray(new Point(0, 0.5d, 0.5d), new Vector(-2.9d, 0.85d, -0.5d))), "Ray On edge");
         //TC12: Ray in vertex
-        assertNull(triangle.findIntersections(new Ray(new Point(1,0,0), new Vector(0.32d,-0.09d,0))),"Ray On vertex");
+
+        assertNull(triangle.findIntersections(new Ray(new Point(-1, 0, 0), new Vector(1,1,0))), "Ray On vertex");
         //TC13: Ray On edge's continuation
-        assertNull(triangle.findIntersections(new Ray(new Point(0,-0.5d,1.5d), new Vector(-2.31d,-1d,-1.5d))),"Ray On edge's continuation");
+        assertNull(triangle.findIntersections(new Ray(new Point(0, -0.5d, 1.5d), new Vector(-2.31d, -1d, -1.5d))), "Ray On edge's continuation");
     }
+
     @Test
     void findGeoIntersectionsHelperTest1() {
         //region ***test for intersection points with consideration to maxDistance parameter

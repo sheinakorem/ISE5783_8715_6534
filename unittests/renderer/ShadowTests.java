@@ -1,18 +1,19 @@
 package renderer;
-import renderer.RayTracerBasic;
-import renderer.*;
 
+import geometries.Intersectable;
+import geometries.Sphere;
+import geometries.Triangle;
+import lighting.AmbientLight;
+import lighting.SpotLight;
 import org.junit.jupiter.api.Test;
-
-import static java.awt.Color.*;
-
-import geometries.*;
-import lighting.*;
-import primitives.*;
-import renderer.*;
+import primitives.Color;
+import primitives.Material;
+import primitives.Point;
+import primitives.Vector;
 import scene.Scene;
 
-import java.util.List;
+import static java.awt.Color.BLUE;
+import static java.awt.Color.white;
 
 /**
  * Testing basic shadows
@@ -52,8 +53,7 @@ public class ShadowTests {
     public void sphereTriangleInitial() {
         sphereTriangleHelper("shadowSphereTriangleInitial", //
                 new Triangle(new Point(-70, -40, 0), new Point(-40, -70, 0), new Point(-68, -68, -4)), //
-               // new Point(-100, -100, 200));
-        new Point(-80,-80,80));
+                 new Point(-100, -100, 200));
 
 
     }
@@ -65,8 +65,7 @@ public class ShadowTests {
     public void sphererTriangleMove1() {
         sphereTriangleHelper("shadowSphereTriangleMove2", //
                 new Triangle(new Point(-62, -32, 0), new Point(-32, -62, 0), new Point(-60, -60, -4)), //
-                //  new Point(-100, -100, 200));
-                new Point(-76, -76, 70));
+                 new Point(-100, -100, 200));
     }
 
     /**
@@ -78,8 +77,7 @@ public class ShadowTests {
                 new Triangle(new Point(-50, -20, 1),
                         new Point(-20, -50, 1),
                         new Point(-48, -48, -5)), //
-                // new Point(-100, -100, 200));
-                new Point(-76, -76, 70));
+                 new Point(-100, -100, 200));
     }
 
 

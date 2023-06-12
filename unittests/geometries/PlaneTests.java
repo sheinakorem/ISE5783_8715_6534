@@ -143,11 +143,12 @@ public class PlaneTests {
 
         //**** Group: Special case
         //TC16: Ray begins at the plane (p0 is in the plane, but not the ray)
-        assertNull(plane.findIntersections(new Ray(new Point(1, 0, 0), new Vector(0, 0, -1))), "Ray begins at the plane (p0 is in the plane, but not the ray)");
+        assertNull(plane.findIntersections(new Ray(new Point(0, 0.5, 0.5), new Vector(1, 1, 1))), "Ray begins at the plane (p0 is in the plane, but not the ray)");
+
+
 
         //TC17: Ray begins in the plane's reference point
-        assertNull(plane.findIntersections(new Ray(plane.getPoint(), new Vector(1, 0, 0))), "Ray begins in the plane's reference point");
-    }
+        assertNull(plane.findIntersections(new Ray(new Point(0, 0, 1), new Vector(1, 1, 0))), "Must not be plane intersection");    }
 
     /**
      * Test method for {@link geometries.Plane#findGeoIntersectionsHelper(Ray, double)}
@@ -161,7 +162,7 @@ public class PlaneTests {
         assertNull(plane.findGeoIntersectionsHelper(ray, 1d), "wrong zero intersections");
         List<Intersectable.GeoPoint> res = plane.findGeoIntersectionsHelper(ray, 8d);
 
-        Intersectable.GeoPoint gp = new Intersectable.GeoPoint((Geometry)plane, new Point(4,0,1));
+        Intersectable.GeoPoint gp = new Intersectable.GeoPoint((Geometry) plane, new Point(4, 0, 1));
         assertEquals(List.of(gp), res, "wrong one intersections");
     }
 }

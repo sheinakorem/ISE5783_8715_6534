@@ -1,8 +1,10 @@
 package primitives;
 
+import geometries.Intersectable.GeoPoint;
+
 import java.util.List;
 
-import geometries.Intersectable.GeoPoint;
+import static primitives.Util.isZero;
 
 /**
  * class that represents Ray
@@ -18,8 +20,8 @@ public class Ray {
     /**
      * Constructor for ray with offset
      *
-     * @param point          original point laying on the surface of the geometry
-     * @param direction      normal vector from the geometry
+     * @param point     original point laying on the surface of the geometry
+     * @param direction normal vector from the geometry
      */
     public Ray(Point point, Vector direction, Vector n) {
         // Compute the offset vector based on the orientation of the normal
@@ -30,6 +32,17 @@ public class Ray {
 
     }
 
+
+    /**
+     * constructor that accepts a point and a vector
+     *
+     * @param p =point
+     * @param v = normalized vector
+     */
+    public Ray(Point p, Vector v) {
+        this.p0 = p;
+        this.dir = v.normalize();
+    }
 
     public Vector getDir() {
         return dir;
@@ -42,18 +55,10 @@ public class Ray {
      * @return A point on the ray.
      */
     public Point getPoint(double t) {
+        if(isZero(t)){
+            return p0;
+        }
         return p0.add(dir.scale(t));
-    }
-
-    /**
-     * constructor that accepts a point and a vector
-     *
-     * @param p =point
-     * @param v = normalized vector
-     */
-    public Ray(Point p, Vector v) {
-        this.p0 = p;
-        this.dir = v.normalize();
     }
 
     /**
@@ -86,19 +91,22 @@ public class Ray {
 
     public Point findClosestPoint(List<Point> points) {
         return points == null || points.isEmpty() ? null
-                : findClosestGeoPoint(points.stream().map(p -> new GeoPoint(null, p)).toList()).point;
+                : findClosestGeoPoint(points.stream()
+                .map(p -> new GeoPoint(null, p))
+                .toList())
+                .point;
     }
 
 
     public GeoPoint findClosestGeoPoint(List<GeoPoint> intersections) {
         double minDistance = Double.MAX_VALUE;
         double d;
-        GeoPoint closePoint = null;
 
         if (intersections == null) {
             return null;
         }
 
+        GeoPoint closePoint = null;
         for (GeoPoint geoP : intersections) {
 
             d = geoP.point.distance(p0);
@@ -108,6 +116,7 @@ public class Ray {
                 closePoint = geoP;
             }
         }
+
         return closePoint;
     }
 

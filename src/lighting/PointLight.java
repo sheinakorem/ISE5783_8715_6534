@@ -13,45 +13,6 @@ public class PointLight extends Light implements LightSource {
     private Double3 kL = Double3.ZERO; // Linear attenuation
     private Double3 kQ = Double3.ZERO; // Quadratic attenuation
 
-    public PointLight setKc(Double3 kC) {
-        this.kC = kC;
-        return this;
-    }
-    public PointLight setKc(double kC) {
-        this.kC = new Double3(kC);
-        return this;
-    }
-
-    public PointLight setKl(Double3 kL) {
-        this.kL = kL;
-        return this;
-    }
-    public PointLight setKl(double kL) {
-        this.kL = new Double3(kL);
-        return this;
-    }
-
-    public PointLight setKq(Double3 kQ) {
-        this.kQ = kQ;
-        return this;
-    }
-    public PointLight setKq(double kQ) {
-        this.kQ = new Double3(kQ);
-        return this;
-    }
-
-    /**
-     * Constructor for light
-     *
-     * @param colorIntensity intensity (color) of light
-     */
-
-    public PointLight(Color colorIntensity, Point position, Double3 kC, Double3 kL, Double3 kQ) {
-        this(colorIntensity, position);
-        this.kC = kC;
-        this.kL = kL;
-        this.kQ = kQ;
-    }
 
     /**
      * constructor for point light
@@ -63,17 +24,38 @@ public class PointLight extends Light implements LightSource {
     public PointLight(Color colorIntensity, Point position) {
         super(colorIntensity);
         this.position = position;
-     }
-
-    /**
-     * dummy overriding Light getIntensity()
-     *
-     * @return light intensity
-     */
-    @Override
-    public Color getIntensity() {
-        return super.getIntensity();
     }
+
+    public PointLight setKc(Double3 kC) {
+        this.kC = kC;
+        return this;
+    }
+
+    public PointLight setKc(double kC) {
+        this.kC = new Double3(kC);
+        return this;
+    }
+
+    public PointLight setKl(Double3 kL) {
+        this.kL = kL;
+        return this;
+    }
+
+    public PointLight setKl(double kL) {
+        this.kL = new Double3(kL);
+        return this;
+    }
+
+    public PointLight setKq(Double3 kQ) {
+        this.kQ = kQ;
+        return this;
+    }
+
+    public PointLight setKq(double kQ) {
+        this.kQ = new Double3(kQ);
+        return this;
+    }
+
 
     /**
      * overriding LightSource getIntensity(Point3D)

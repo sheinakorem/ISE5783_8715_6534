@@ -3,7 +3,6 @@ package renderer;
 import primitives.Color;
 import primitives.Ray;
 import scene.Scene;
-import geometries.Intersectable.GeoPoint;
 
 public abstract class RayTracerBase {
 
@@ -14,6 +13,7 @@ public abstract class RayTracerBase {
 
     /**
      * A builder function that get a scene
+     *
      * @param scene
      */
     public RayTracerBase(Scene scene) {
@@ -22,6 +22,7 @@ public abstract class RayTracerBase {
 
     /**
      * An abstract function that get a ray and return the color of the point that cross the ray
+     *
      * @param ray ray that intersect the scene
      * @return Color
      */

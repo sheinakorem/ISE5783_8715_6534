@@ -5,7 +5,8 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Unit tests for geometries.Tube class
@@ -20,7 +21,7 @@ class TubeTests {
      */
     @Test
 
-   public  void testConstructor() {
+    public void testConstructor() {
         // ============ Equivalence Partitions Tests ==============
         //TC01: Test for a proper result
         try {
@@ -50,11 +51,12 @@ class TubeTests {
     @Test
     public void testGetNormal() {
         // ============ Equivalence Partitions Tests ==============
-        Tube tube= new Tube(1d, new Ray(new Point(1,1,0), new Vector(0,0,1)));
+        Tube tube = new Tube(1d, new Ray(new Point(1, 1, 0), new Vector(0, 0, 1)));
 
-        assertEquals(new Vector(0,-1,0), tube.getNormal(new Point(1,0,2)), "Bad normal to tube");
+        assertEquals(new Vector(0, -1, 0), tube.getNormal(new Point(1, 0, 2)), "Bad normal to tube");
 
     }
+
     /**
      * Test method for {@link geometries.Plane#findGeoIntersectionsHelper(Ray, double)}
      */

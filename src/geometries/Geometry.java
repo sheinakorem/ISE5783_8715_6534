@@ -1,21 +1,24 @@
 package geometries;
 
-import primitives.*;
-
-import java.util.List;
+import primitives.Color;
+import primitives.Material;
+import primitives.Point;
+import primitives.Vector;
 
 /**
  * An interface called  Geometry for geometric shapes
+ *
  * @author michal slutzkin & sheina korem
  */
-public abstract class Geometry extends Intersectable{
+public abstract class Geometry extends Intersectable {
 
 
-
+    protected Color emission = Color.BLACK;
     private Material material = new Material();
 
     /**
      * material getter
+     *
      * @return material
      */
     public Material getMaterial() {
@@ -24,17 +27,18 @@ public abstract class Geometry extends Intersectable{
 
     /**
      * set material
+     *
      * @param material
      * @return this
      */
     public Geometry setMaterial(Material material) {
         this.material = material;
         return this;
-     }
-    protected Color emission=Color.BLACK;
+    }
 
     /**
      * simple getter
+     *
      * @return emission
      */
     public Color getEmission() {
@@ -43,6 +47,7 @@ public abstract class Geometry extends Intersectable{
 
     /**
      * setter
+     *
      * @param emission=emission
      * @return this
      */
@@ -53,11 +58,12 @@ public abstract class Geometry extends Intersectable{
 
     /**
      * function that gets point and returns a normalized vector
+     *
      * @param p = point
      * @return normalized vector
      */
-    abstract  public Vector getNormal(Point p);
+    abstract public Vector getNormal(Point p);
 
 
-   // protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance);
+    // protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance);
 }

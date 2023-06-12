@@ -114,17 +114,16 @@ public class Tube extends RadialGeometry {
         double t2 = alignZero((-b - delta) / (2 * a));
 
 
-
         // root> 0 indicates that scaling factor is in
         // forward direction of ray and , intersection occurs
         // root < 0 indicates scale factor is in opposite direction
         // no intersection occurs
-        if (t1 > 0 && t2 > 0 && alignZero(t1-maxDistance) <= 0 && alignZero(t2-maxDistance) <= 0)
-            return List.of(new GeoPoint(this,ray.getPoint(t2)), new GeoPoint(this,ray.getPoint(t1)));
-        if (t1 > 0 && alignZero(t1-maxDistance) <= 0)
-            return List.of(new GeoPoint(this,ray.getPoint(t1)));
-        if (t2 > 0 && alignZero(t2-maxDistance) <= 0)
-            return List.of(new GeoPoint(this,ray.getPoint(t2)));
+        if (t1 > 0 && t2 > 0 && alignZero(t1 - maxDistance) <= 0 && alignZero(t2 - maxDistance) <= 0)
+            return List.of(new GeoPoint(this, ray.getPoint(t2)), new GeoPoint(this, ray.getPoint(t1)));
+        if (t1 > 0 && alignZero(t1 - maxDistance) <= 0)
+            return List.of(new GeoPoint(this, ray.getPoint(t1)));
+        if (t2 > 0 && alignZero(t2 - maxDistance) <= 0)
+            return List.of(new GeoPoint(this, ray.getPoint(t2)));
         return null;
     }
 }

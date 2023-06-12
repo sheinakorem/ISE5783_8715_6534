@@ -13,10 +13,21 @@ public abstract class Intersectable {
         return geoList == null ? null : geoList.stream().map(gp -> gp.point).toList();
     }
     //public List<GeoPoint> findGeoIntersections(Ray ray) {
-     //   return findGeoIntersectionsHelper(ray);
-   // }
+    //   return findGeoIntersectionsHelper(ray);
+    // }
 
-   // protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance);
+    // protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance);
+
+    protected abstract List<GeoPoint>
+    findGeoIntersectionsHelper(Ray ray, double maxDistance);
+
+    public final List<GeoPoint> findGeoIntersections(Ray ray) {
+        return findGeoIntersections(ray, Double.POSITIVE_INFINITY);
+    }
+
+    public final List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
+        return findGeoIntersectionsHelper(ray, maxDistance);
+    }
 
     /**
      * Represents a geographic point with associated geometry and coordinates.
@@ -48,7 +59,7 @@ public abstract class Intersectable {
 
         /**
          * @param o object
-         * @return  whether recieved GeoPoint o is equal to this one
+         * @return whether recieved GeoPoint o is equal to this one
          */
         @Override
         public boolean equals(Object o) {
@@ -61,22 +72,15 @@ public abstract class Intersectable {
 
         /**
          * override function to print the values of the class
+         *
          * @return point and geometry
          */
         @Override
         public String toString() {
             return "GeoPoint" +
                     "geometry=" + geometry +
-                    ", point=" + point ;
+                    ", point=" + point;
         }
-    }
-    protected abstract List<GeoPoint>
-    findGeoIntersectionsHelper(Ray ray, double maxDistance);
-    public final List<GeoPoint> findGeoIntersections(Ray ray) {
-        return findGeoIntersections(ray, Double.POSITIVE_INFINITY);
-    }
-    public final List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
-        return findGeoIntersectionsHelper(ray, maxDistance);
     }
 
 

@@ -1,6 +1,6 @@
 package primitives;
 
-import java.util.*;
+import java.util.Objects;
 
 /**
  * vector class that inserts point
@@ -18,10 +18,7 @@ public class Vector extends Point {
      * @param z=z
      */
     public Vector(double x, double y, double z) {
-        super(x, y, z);
-        if (xyz.equals(Double3.ZERO)) {
-            throw new IllegalArgumentException("Vector zero");
-        }
+        this(new Double3(x, y, z));
     }
 
     /**
@@ -30,7 +27,7 @@ public class Vector extends Point {
      * @param xyz=xyz
      */
     public Vector(Double3 xyz) {
-        super(xyz.d1, xyz.d2, xyz.d3);
+        super(xyz);
         if (xyz.equals(Double3.ZERO)) {
             throw new IllegalArgumentException("Vector zero");
         }
@@ -108,11 +105,11 @@ public class Vector extends Point {
      */
     public Vector normalize() {
 
-        double magnitude = Math.sqrt(xyz.d1 * xyz.d1 + xyz.d2 * xyz.d2 + xyz.d3 * xyz.d3);
-        if (magnitude == 0) {
+        double len = length();
+        if (len == 0) {
             throw new ArithmeticException("Cannot normalize the zero vector");
         }
-        return new Vector(xyz.d1 / magnitude, xyz.d2 / magnitude, xyz.d3 / magnitude);
+        return new Vector(xyz.reduce(len));
     }
 
     /**
@@ -121,13 +118,18 @@ public class Vector extends Point {
      * @param o=o
      * @return True if equal
      */
+    /**
+     * override function for equal operation
+     *
+     * @param o =o
+     * @return True if equal
+     */
     @Override
     public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (!(o instanceof Vector v))
-            return false;
-        return Objects.equals(xyz, v.xyz);
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vector vector = (Vector) o;
+        return xyz.equals(vector.xyz);
     }
 
     /**

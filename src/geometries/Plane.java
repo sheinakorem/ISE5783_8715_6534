@@ -47,18 +47,12 @@ public final class Plane extends Geometry {
      */
     public Plane(Point p0, Vector vector) {
         this.q0 = p0;
-        if (!(isZero(vector.length() - 1d))) {
-            this.normal = vector.normalize();
-        } else {
-            this.normal = vector;
-        }
+        this.normal = vector.normalize();
     }
 
-    public Point getPoint() {
+    public Point getQ0() {
         return q0;
     }
-
-    ;
 
     /**
      * getNormal function for Polygon
@@ -90,16 +84,13 @@ public final class Plane extends Geometry {
      */
 
 
-
-
     @Override
-    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance)  {
-        Vector p0Q;
-        try {
-            p0Q = q0.subtract(ray.getP0());
-        } catch (IllegalArgumentException e) {
-            return null; // ray starts from point Q - no intersections
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
+
+        if(q0.equals(ray.getP0())){
+            throw new IllegalArgumentException(" ray starts from point Q ");
         }
+        Vector p0Q = q0.subtract(ray.getP0());
 
         double nv = normal.dotProduct(ray.getDir());
         if (isZero(nv)) // ray is parallel to the plane - no intersections
@@ -109,14 +100,12 @@ public final class Plane extends Geometry {
 
         double t = alignZero(normal.dotProduct(p0Q) / nv);
 
-        if (t > 0 && alignZero(t-maxDistance)<=0) {
+        if (t > 0 && alignZero(t - maxDistance) < 0) {
             GeoPoint geo = new GeoPoint(this, ray.getPoint(t));
             return List.of(geo);
         }
-    return null;
+        return null;
 
     }
-
-
 
 }

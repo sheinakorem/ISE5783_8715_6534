@@ -32,13 +32,12 @@ public class Cylinder extends Tube {
      *
      * @param radius  = radius of cylinder
      * @param axisRay = axisRay from Tube
-     * @param h  = height of Cylinder
+     * @param h       = height of Cylinder
      */
     public Cylinder(double h, Ray axisRay, double radius) {
         super(radius, axisRay);
 
-        if (h <= 0)
-        {
+        if (h <= 0) {
             throw new IllegalArgumentException("The height should be greater then 0");
         }
 
@@ -78,20 +77,21 @@ public class Cylinder extends Tube {
 
         return p.subtract(o).normalize();
     }
+
     @Override
-    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray,double maxDistance) {
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
         Point p0 = axisRay.getP0();
         Point p1 = axisRay.getPoint(height);
         List<GeoPoint> result = null;
 
         // Find the tube's intersections
-        List<GeoPoint> tubePoints = super.findGeoIntersections(ray,maxDistance);
+        List<GeoPoint> tubePoints = super.findGeoIntersections(ray, maxDistance);
 
         double distance = tubePoints.get(0).point.distance(ray.getP0());
         //check that the intersection point is closer to ray origin
-        if(alignZero(distance-maxDistance)>0)
-        {
-            return null; }
+        if (alignZero(distance - maxDistance) > 0) {
+            return null;
+        }
         if (tubePoints != null) {
             if (tubePoints.size() == 2) {
                 // Checks if the intersection points are on the cylinder
@@ -160,6 +160,7 @@ public class Cylinder extends Tube {
 
     /**
      * Helper function that checks if a points is between the two caps (not on them, even on the edge)
+     *
      * @param p The point that will be checked.
      * @return True if it is between the caps. Otherwise, false.
      */

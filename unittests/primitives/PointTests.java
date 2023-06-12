@@ -2,10 +2,12 @@ package primitives;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Unit tests for primitives.Point class
+ *
  * @author michal slutzkin & sheina korem
  */
 class PointTests {
@@ -16,15 +18,15 @@ class PointTests {
     @Test
     void testsSubtract() {
 
-            // ============ Equivalence Partitions Tests ==============
-            // TC01: Simple test
-            assertEquals(new Vector(1, 1, 1), new Point(2, 3, 4).subtract(new Point(1, 2, 3)), //
-                    "Wrong point subtract");
+        // ============ Equivalence Partitions Tests ==============
+        // TC01: Simple test
+        assertEquals(new Vector(1, 1, 1), new Point(2, 3, 4).subtract(new Point(1, 2, 3)), //
+                "Wrong point subtract");
 
-            // =============== Boundary Values Tests ==================
-            // TC11: test subtracting same point
-            assertThrows(IllegalArgumentException.class, () -> new Point(1, 2, 3).subtract(new Point(1, 2, 3)), //
-                    "Subtract P from P must throw exception");
+        // =============== Boundary Values Tests ==================
+        // TC11: test subtracting same point
+        assertThrows(IllegalArgumentException.class, () -> new Point(1, 2, 3).subtract(new Point(1, 2, 3)), //
+                "Subtract P from P must throw exception");
     }
 
     /**

@@ -95,7 +95,7 @@ public class Camera {
      * @param rayTracer The RayTracerBase object
      * @return The Camera object itself
      */
-    public Camera setRayTracer(RayTracerBase rayTracer)  {
+    public Camera setRayTracer(RayTracerBase rayTracer) {
         this.rayTracer = rayTracer;
         return this;
     }
@@ -114,15 +114,15 @@ public class Camera {
         Point Pc = p0.add(vTo.scale(distance));
 
         //pixel ratios
-        double Ry = (double)height / nY;
-        double Rx = (double)width / nX;
+        double Ry = (double) height / nY;
+        double Rx = (double) width / nX;
 
         //Point of the center pixel in Nx,Ny coordinates
         // starting from view plane center
         Point Pij = Pc;
 
         //offsets for Pij
-        double Yi = -(i - (nY - 1) /2d) * Ry;
+        double Yi = -(i - (nY - 1) / 2d) * Ry;
         double Xj = (j - (nX - 1) / 2d) * Rx;
 
         //adding opffsts if necessary
@@ -170,7 +170,7 @@ public class Camera {
         } catch (MissingResourceException e) {
             throw new UnsupportedOperationException("Not implemented yet" + e.getClassName());
         }
-        return  this;
+        return this;
     }
 
 
@@ -182,7 +182,6 @@ public class Camera {
         return rayTracer.traceRay(ray);
 
     }
-
 
 
     public void printGrid(int interval, Color color) {

@@ -1,9 +1,9 @@
 package scene;
 
 import geometries.Geometries;
+import lighting.AmbientLight;
 import lighting.LightSource;
 import primitives.Color;
-import lighting.AmbientLight;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -26,7 +26,7 @@ public class Scene {
     private final Geometries geometries;
 
 
-    private final  List<LightSource> lights;
+    private final List<LightSource> lights;
 
     /**
      * @return light sources in scene
@@ -34,7 +34,21 @@ public class Scene {
     /**
      * Ambient light of the scene
      */
-    private  AmbientLight ambientLight;
+    private AmbientLight ambientLight;
+
+    /**
+     * Private constructor for the Scene class.
+     * Use the SceneBuilder to construct Scene objects.
+     *
+     * @param builder the SceneBuilder object containing the scene parameters
+     */
+    private Scene(SceneBuilder builder) {
+        this.name = builder.name;
+        this.background = builder.background;
+        this.ambientLight = builder.ambientLight;
+        this.geometries = builder.geometries;
+        this.lights = builder.lights;
+    }
 
     /**
      * Get the name of the scene.
@@ -63,6 +77,12 @@ public class Scene {
         return ambientLight;
     }
 
+    // not according to Builder Pattern for testing compatibility
+    public Scene setAmbientLight(AmbientLight ambientLight) {
+        this.ambientLight = ambientLight;
+        return this;
+    }
+
     /**
      * Get the geometries in the scene.
      *
@@ -76,27 +96,7 @@ public class Scene {
         return lights;
     }
 
-    // not according to Builder Pattern for testing compatibility
-    public Scene setAmbientLight(AmbientLight ambientLight) {
-        this.ambientLight = ambientLight;
-        return this;
-    }
-
     /**
-     * Private constructor for the Scene class.
-     * Use the SceneBuilder to construct Scene objects.
-     *
-     * @param builder the SceneBuilder object containing the scene parameters
-     */
-    private Scene(SceneBuilder builder) {
-        this.name = builder.name;
-        this.background = builder.background;
-        this.ambientLight = builder.ambientLight;
-        this.geometries = builder.geometries;
-        this.lights = builder.lights;
-    }
-
-     /**
      * The SceneBuilder class is used to construct Scene objects.
      */
     public static class SceneBuilder {
@@ -105,17 +105,17 @@ public class Scene {
          */
         private final String name;
 
-         /**
-          * Geometries in the scene.
-          */
-         private Geometries geometries = new Geometries();
+        /**
+         * Geometries in the scene.
+         */
+        private Geometries geometries = new Geometries();
 
         /**
-         *  All light sources for the scene
+         * All light sources for the scene
          */
-        private  List<LightSource> lights = new LinkedList<>();
+        private List<LightSource> lights = new LinkedList<>();
 
-         /**
+        /**
          * Color of the background. The default is black.
          */
         private Color background = Color.BLACK;
@@ -131,17 +131,17 @@ public class Scene {
          * @param ambientLight the ambient light
          * @return the SceneBuilder object
          */
-         /**
-          * Create a new SceneBuilder with the specified name.
-          *
-          * @param name the name of the scene
-          */
-         public SceneBuilder(String name) {
-             this.name = name;
-         }
+        /**
+         * Create a new SceneBuilder with the specified name.
+         *
+         * @param name the name of the scene
+         */
+        public SceneBuilder(String name) {
+            this.name = name;
+        }
 
 
-         public SceneBuilder setAmbientLight(AmbientLight ambientLight) {
+        public SceneBuilder setAmbientLight(AmbientLight ambientLight) {
             this.ambientLight = ambientLight;
             return this;
         }
@@ -157,7 +157,7 @@ public class Scene {
             return this;
         }
 
-          /**
+        /**
          * Set the background color of the scene.
          *
          * @param background the background color
@@ -168,12 +168,12 @@ public class Scene {
             return this;
         }
 
-         public SceneBuilder setLights(List<LightSource> lights) {
-             this.lights = lights;
-             return this;
-         }
+        public SceneBuilder setLights(List<LightSource> lights) {
+            this.lights = lights;
+            return this;
+        }
 
-         /**
+        /**
          * Build the Scene object with the provided parameters.
          *
          * @return the constructed Scene object

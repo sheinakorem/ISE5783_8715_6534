@@ -4,27 +4,29 @@ import primitives.Color;
 import primitives.Point;
 import primitives.Vector;
 
-abstract  class Light {
- private final Color intensity;
+abstract class Light {
+    private final Color intensity;
 
- /**
-  * Constructor for light
-  * @param intensity intensity (color) of light
-  */
-  public Light(Color intensity)  {
-  this.intensity = intensity;
- }
+    /**
+     * Constructor for light
+     *
+     * @param intensity intensity (color) of light
+     */
+    public Light(Color intensity) {
+        this.intensity = intensity;
+    }
 
 
- /**
-  *  Get intensity of light
-  * @return intensity of light
-  */
-  public Color getIntensity() {
-  return intensity;
- }
+    /**
+     * Get intensity of light
+     *
+     * @return intensity of light
+     */
+    public Color getIntensity() {
+        return intensity;
+    }
 
- //public abstract Color getIntensity(Point p);
+    //public abstract Color getIntensity(Point p);
 
- public abstract Vector getL(Point p);
+
 }

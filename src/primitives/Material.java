@@ -7,23 +7,26 @@ public class Material {
      * factors
      */
     public Double3 kD = Double3.ZERO;
-    public Double3 kS= Double3.ZERO;
-    public int nShininess=0;
+    public Double3 kS = Double3.ZERO;
+    public int nShininess = 0;
 
-    public Double3 kT=Double3.ZERO;
-    public Double3 kR=Double3.ZERO;
+    public Double3 kT = Double3.ZERO;
+    public Double3 kR = Double3.ZERO;
+
     /**
      * set with Double3
+     *
      * @param kD
      * @return this
      */
     public Material setkD(Double3 kD) {
         this.kD = kD;
         return this;
-     }
+    }
 
     /**
      * set with Double3
+     *
      * @param kS
      * @return this
      */
@@ -34,15 +37,18 @@ public class Material {
 
     /**
      * set with Double
+     *
      * @param kD
      * @return this
      */
     public Material setkD(Double kD) {
-        this.kD= new Double3(kD);
+        this.kD = new Double3(kD);
         return this;
     }
+
     /**
      * set with Double
+     *
      * @param kS
      * @return this
      */
@@ -70,8 +76,10 @@ public class Material {
         this.kR = new Double3(kR);
         return this;
     }
+
     /**
      * set nShininess
+     *
      * @param nShininess
      * @return
      */
@@ -79,7 +87,6 @@ public class Material {
         this.nShininess = nShininess;
         return this;
     }
-
 
 
 }
