@@ -15,6 +15,10 @@ import static primitives.Util.isZero;
  * @author michal slutzkin & sheina korem
  */
 public class Triangle extends Polygon {
+    final Point p0;
+    final Point p1;
+    final Point p2;
+
     /**
      * constructor for Triangle . uses the Polygon constructor
      *
@@ -24,48 +28,44 @@ public class Triangle extends Polygon {
      */
     public Triangle(Point p1, Point p2, Point p3) {
         super(p1, p2, p3);
-    }
+        this.p0 = p1;
+        this.p1 = p2;
+        this.p2 = p3;
 
+    }
     @Override
     public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
-        List<GeoPoint> intersections = plane.findGeoIntersections(ray, maxDistance);
-        if (intersections == null) {
-            return null;//there are no intersection points
-        }
-//        double distance = intersections.get(0).point.distance(ray.getP0());
-//        //check that the intersection point is closer to ray origin
-//        if (alignZero(distance - maxDistance) > 0) {
-//            return null;
-//        }
+        List<GeoPoint> planeIntersections = plane.findGeoIntersections(ray, maxDistance);
+        if (planeIntersections == null)
+            return null;
 
-
-        Point p0 = ray.getP0();//the start ray point
+        Point p0 = ray.getP0();
         Vector v = ray.getDir();
 
-        Vector v1 = vertices.get(0).subtract(p0);//vector from the ray start point to the polygon vertices
-        Vector v2 = vertices.get(1).subtract(p0);//vector from the ray start point to the polygon vertices
-        Vector v3 = vertices.get(2).subtract(p0);//vector from the ray start point to the polygon vertices
+        Vector v1 = this.p0.subtract(p0);
+        Vector v2 = this.p1.subtract(p0);
+        Vector v3 = this.p2.subtract(p0);
 
         double s1 = v.dotProduct(v1.crossProduct(v2));
         if (isZero(s1))
-            return null;//the point is out of triangle
+            return null;
         double s2 = v.dotProduct(v2.crossProduct(v3));
         if (isZero(s2))
-            return null;//the point is out of triangle
+            return null;
         double s3 = v.dotProduct(v3.crossProduct(v1));
         if (isZero(s3))
-            return null;//the point is out of triangle
+            return null;
 
-        //for GeoPoint
-        //intersections.get(0).geometry = this;
-
-        //  return ((s1 > 0 && s2 > 0 && s3 > 0) || (s1 < 0 && s2 < 0 && s3 < 0)) ? intersections : null;
-
-        if((s1 > 0 && s2 > 0 && s3 > 0) || (s1 < 0 && s2 < 0 && s3 < 0)){
-            Point point=intersections.get(0).point ;
-            return List.of((new GeoPoint(this,point)));
+        if ((s1 > 0 && s2 > 0 && s3 > 0) || (s1 < 0 && s2 < 0 && s3 < 0)) {
+            Point point = planeIntersections.get(0).point;
+            return List.of(new GeoPoint(this, point));
         }
         return null;
     }
+    @Override
+    public String toString() {
+        return "Triangle {" + p0 + "," + p1 + "," + p2 + "}";
+    }
 
 }
+
